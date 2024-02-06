@@ -1,0 +1,61 @@
+name: NetCore 6 CI
+
+on:
+  push:
+    branches: [ AR_05_MINTAKA/feature/* , develop ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depht: 0
+
+      - name: Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Yeoman
+        run: | 
+          npm install -g yo generator-code yeoman-generator
+          npm install
+          npm link 
+        working-directory: generator/6.0/Generator/generator-netcore6
+
+      - name: Generate code
+        run: yo netcore6
+        working-directory: generator/6.0/Generator/generator-netcore6
+        
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.x'
+          include-prerelease: true
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: generator/6.0/Generator/generator-netcore6/arquetipounittesting-service
+
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: generator/6.0/Generator/generator-netcore6/arquetipounittesting-service
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+        working-directory: generator/6.0/Generator/generator-netcore6/arquetipounittesting-service
+
+      - uses: actions/setup-java@v1 
+        with:
+          java-version: "11"
+
+      - name: SonarQube Analysis
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+          dotnet sonarscanner begin /k:"23_Orion_MINTAKA" /d:sonar.login="sqp_c171918f7b74a06e6409a1c54e2c6e3ea738b497" /d:sonar.host.url="https://devtools.axity.com/sonarlts"
+          dotnet build --configuration Release
+          dotnet test --configuration .\Axity.ArquetipoUnitTesting.Api\Axity.ArquetipoUnitTesting.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=\"TestResults/\"
+          dotnet sonarscanner end /d:sonar.login="sqp_c171918f7b74a06e6409a1c54e2c6e3ea738b497"
+        working-directory: generator/6.0/Generator/generator-netcore6/arquetipounittesting-service

@@ -1,0 +1,84 @@
+{
+  "company": "Axity",
+  "name": "ArquetipoUnitTesting",
+  "port": 9091,
+  "controllers": [
+  {
+    "name": "Tests",
+    "singularName": "Test",
+    "actions": [ "get", "post", "put", "delete" ],
+    "tableName": "test",
+    "properties": [
+      {
+        "name": "Id",
+        "type": "int",
+        "db": {
+          "name": "id",
+          "isPrimaryKey": true,
+          "allowNull": false,
+          "maxLength": 0
+        },
+        "allowUpdate": false,
+        "isRequiredToInsert": false,
+        "includeInResponse": true
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "db": {
+          "name": "name",
+          "isPrimaryKey": false,
+          "allowNull": false,
+          "maxLength": 0
+        },
+        "allowUpdate": true,
+        "isRequiredToInsert": true,
+        "includeInResponse": true
+      },
+      {
+        "name": "Active",
+        "type": "bool",
+        "db": {
+          "name": "active",
+          "isPrimaryKey": false,
+          "allowNull": false,
+          "maxLength": 0
+        },
+        "allowUpdate": true,
+        "isRequiredToInsert": true,
+        "includeInResponse": true
+      },
+      {
+        "name": "Create",
+        "type": "DateTime",
+        "db": {
+          "name": "create",
+          "isPrimaryKey": false,
+          "allowNull": false,
+          "maxLength": 0
+        },
+        "allowUpdate": true,
+        "isRequiredToInsert": true,
+        "includeInResponse": true
+      },
+      {
+        "name": "User",
+        "type": "string",
+        "db": {
+          "name": "user",
+          "isPrimaryKey": false,
+          "allowNull": false,
+          "maxLength": 100
+        },
+        "allowUpdate": true,
+        "isRequiredToInsert": true,
+        "includeInResponse": true
+      }
+    ],
+    "data": [
+      { "Id": 1, "Name": "Hugo", "LastName": "Meraz", "Create": "2023-01-17 16:50:33" },
+      { "Id": 2, "Name": "Pamela", "LastName": "Rivera", "Create": "2023-01-17 16:50:33" },
+      { "Id": 3, "Name": "Ingrid", "LastName": "Mendoza", "Create": "2023-01-17 16:50:33" }
+    ]
+  }]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "generator-netcore6",
+  "version": "1.0.0",
+  "description": "Proyecto generado para la configuración automática de microservicios con netcore 6",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Ingrid Mendoza, Alejandro Hernandez, Pamela Rivera",
+  "license": "MIT",
+  "dependencies": {
+    "lorem-ipsum": "^1.0.6",
+    "random-words": "^1.2.0",
+    "yeoman-generator": "^3.1.0"
+  }
+}
