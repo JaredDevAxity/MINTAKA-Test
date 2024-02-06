@@ -11,6 +11,7 @@ jobs:
     uses: JaredDevAxity/AR_26_A_ARCHERNAR_ACTIONS/.github/workflows/MINTAKA_Net.yml@main
     with:   
       node-version: '16'   
+      net-version: '3.1'
     secrets: inherit      
     
   
